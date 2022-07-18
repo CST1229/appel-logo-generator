@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<title>Appel Logo Generator</title>
+	</head>
+	<div id="navbar"></div>
+	<body>
+		<h1>Appel Logo Generator</h1>
+		<input id="name" type="text" placeholder="APPEL">
+		<br />
+		<input id="subtitle-input" type="text" placeholder="by Griffpatch">
+		<br />
+		<label>
+			<input id="lowsub" type="checkbox">
+			Low Subtitle (for when using lowercase letters)
+		</label>
+		
+		<div id="logo-container">
+			<div id="logo">
+				<div id="logo-back"></div>
+				<div id="logo-outline"></div>
+				<div id="logo-front"></div>
+			</div>
+			<div id="subtitle"></div>
+		</div>
+		
+		<style>
+			@font-face {
+				font-family: "Freight Sans";
+				src: url(../font/FreightSans-Medium.ttf);
+				font-display: swap;
+			}
+			@font-face {
+				font-family: "Freight Sans Bold";
+				src: url(../font/FreightSans-Bold.ttf);
+				font-display: swap;
+			}
+			@font-face {
+				font-family: "Freight Sans Ultrablack";
+				src: url(../font/FreightSans-Ultrablack.ttf);
+				font-display: swap;
+			}
+			body {
+				font-family: "Freight Sans", sans-serif;
+				font-size: 15pt;
+				color: black;
+				text-align: center;
+				
+				overflow-x: hidden;
+				margin: 0;
+			}
+			h1 {
+				font-family: "Freight Sans Bold", sans-serif;
+			}
+			
+			input {
+				font-family: inherit;
+				font-size: inherit;
+				margin-bottom: 0.2em;
+			}
+			
+			#logo-container {
+				perspective: 200px;
+				transform-style: preserve-3d;
+				margin-top: 0.5em;
+				
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				
+				overflow-y: hidden;
+				overflow-x: auto;
+			}
+			#logo {
+				font-family: "Freight Sans Ultrablack", sans-serif;
+				font-size: 128px;
+				
+				position: relative;
+				
+				display: inline-block;
+				transform-style: preserve-3d;
+				transform: rotate3d(1, 0, 0, 15deg);
+				
+				line-height: 0;
+				padding: 0.5em 0;
+				
+				overflow: visible;
+				white-space: nowrap;
+			}
+			#logo * {
+				overflow: visible;
+				white-space: nowrap;
+			}
+			#logo-outline {
+				-webkit-text-stroke: 6px black;
+				text-stroke: 6px black;
+				transform: translate(0, 0);
+			}
+			#logo-back {
+				transform: scale(0.9) translateY(20px);
+				color: #a1c3c4;
+			}
+			#logo-front {
+				color: #ffff1f;
+				transform: translate(0, 0);
+			}
+			
+			#subtitle {
+				font-family: "Freight Sans Bold", sans-serif;
+				font-size: 32px;
+			}
+			#subtitle.low {
+				margin-top: 0.5em;
+			}
+		</style>
+		<script>
+			const input = document.getElementById("name");
+			const lowsub = document.getElementById("lowsub");
+			const subtitleInput = document.getElementById("subtitle-input");
+			const logoOutline = document.getElementById("logo-outline");
+			const logoBack = document.getElementById("logo-back");
+			const logoFront = document.getElementById("logo-front");
+			const subtitle = document.getElementById("subtitle");
+			
+			input.addEventListener("input", update);
+			subtitleInput.addEventListener("input", update);
+			lowsub.addEventListener("click", update);
+			
+			update();
+			function update() {
+				logoFront.textContent = input.value;
+				logoBack.textContent = input.value;
+				logoOutline.textContent = input.value;
+				subtitle.textContent = subtitleInput.value;
+				if (lowsub.checked) {
+					subtitle.classList.add("low");
+				} else {
+					subtitle.classList.remove("low");
+				}
+			}
+		</script>
+	</body>
+</html>
