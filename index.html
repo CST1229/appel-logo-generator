@@ -148,11 +148,11 @@
 				logoFront.textContent = input.value;
 				const formattedHTML = logoFront.innerHTML.replaceAll(
 					"&lt;E&gt;",
-					'<img class="appel" src="./img/appel.png">'
+					'<img alt="E" draggable="false" class="appel" src="./img/appel.png">'
 				)
 				const formattedHTMLback = logoFront.innerHTML.replaceAll(
 					"&lt;E&gt;",
-					'<img class="appel" src="./img/appel-shadow.png">'
+					'<img alt="E" draggable="false" class="appel" src="./img/appel-shadow.png">'
 				)
 				logoFront.innerHTML = formattedHTML;
 				logoBack.innerHTML = formattedHTMLback;
