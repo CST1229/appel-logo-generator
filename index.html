@@ -64,7 +64,6 @@
 			#logo-container {
 				perspective: 200px;
 				transform-style: preserve-3d;
-				margin-top: 0.5em;
 				
 				display: flex;
 				flex-direction: column;
@@ -83,8 +82,9 @@
 				transform-style: preserve-3d;
 				transform: rotate3d(1, 0, 0, 15deg);
 				
-				line-height: 0;
-				padding: 0.5em 0 0.75em 0;
+				height: 1.5em;
+				
+				margin-bottom: -0.3em;
 				
 				overflow: visible;
 				white-space: nowrap;
@@ -92,6 +92,10 @@
 			#logo * {
 				overflow: visible;
 				white-space: nowrap;
+			}
+			#logo-outline, #logo-front, #logo-back {
+				height: 1.5em;
+				margin-top: -1.5em;
 			}
 			#logo-outline {
 				-webkit-text-stroke: 6px black;
@@ -101,10 +105,15 @@
 			#logo-back {
 				transform: scale(0.9) translateY(20px);
 				color: #a1c3c4;
+				margin-top: 0;
 			}
 			#logo-front {
 				color: #ffff1f;
 				transform: translate(0, 0);
+			}
+			
+			#logo-outline img {
+				opacity: 0;
 			}
 			
 			#subtitle {
@@ -113,6 +122,12 @@
 			}
 			#subtitle.low {
 				margin-top: 0.5em;
+			}
+			
+			.appel {
+				height: 0.65em;
+				margin: 0 3px -2px 3px;
+				image-rendering: pixelated;
 			}
 		</style>
 		<script>
@@ -131,8 +146,18 @@
 			update();
 			function update() {
 				logoFront.textContent = input.value;
-				logoBack.textContent = input.value;
-				logoOutline.textContent = input.value;
+				const formattedHTML = logoFront.innerHTML.replaceAll(
+					"&lt;E&gt;",
+					'<img class="appel" src="./img/appel.png">'
+				)
+				const formattedHTMLback = logoFront.innerHTML.replaceAll(
+					"&lt;E&gt;",
+					'<img class="appel" src="./img/appel-shadow.png">'
+				)
+				logoFront.innerHTML = formattedHTML;
+				logoBack.innerHTML = formattedHTMLback;
+				logoOutline.innerHTML = formattedHTML;
+				
 				subtitle.textContent = subtitleInput.value;
 				if (lowsub.checked) {
 					subtitle.classList.add("low");
